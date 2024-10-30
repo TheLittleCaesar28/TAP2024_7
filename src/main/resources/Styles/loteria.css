@@ -1,0 +1,65 @@
+.root {
+    -fx-background-image: url("https://static.vecteezy.com/system/resources/previews/007/062/175/non_2x/cinco-de-mayo-background-free-vector.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-padding: 20;
+}
+
+.button {
+    -fx-background-color: #ffcc00;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3e3e3e;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 5, 0, 2, 2);
+}
+
+.button:hover {
+    -fx-background-color: #ffaa00;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 8, 0.5, 3, 3);
+}
+
+
+
+.btn-danger {
+    -fx-background-color: #e74c3c;
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-padding: 12 24;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #c0392b;
+}
+
+.label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ff5722;
+}
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 5, 5);
+}
+
+
+.panel-success {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-border-color: #ffcc00;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-padding: 20;
+}
+
+.hbox {
+    -fx-spacing: 15;
+    -fx-padding: 10;
+}
+
+.vbox {
+    -fx-spacing: 15;
+    -fx-padding: 10;
+}

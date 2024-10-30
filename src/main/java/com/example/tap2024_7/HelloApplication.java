@@ -1,19 +1,17 @@
 package com.example.tap2024_7;
 
+import com.example.tap2024_7.MODELS.Conexion;
+import com.example.tap2024_7.VISTAS.Buscaminas; // Importa la clase Buscaminas
 import com.example.tap2024_7.VISTAS.Calculadora;
-//import com.example.tap2024_7.VISTAS.Loteria;
+import com.example.tap2024_7.VISTAS.Loteria;
+import com.example.tap2024_7.VISTAS.ListaClientes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -21,33 +19,42 @@ public class HelloApplication extends Application {
 
     private BorderPane bdpPrincipal;
     private MenuBar mnbPrincipal;
-    private Menu menCompetencia1, menCompetencia2, menSalir;
-    private MenuItem mitCalculadora, mitLoteria;
+    private Menu menCompetencia1;
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        CrearUI();
+        Scene scene = new Scene(bdpPrincipal, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
+        stage.setTitle("Instituto Tecnológico de Celaya");
+        stage.setScene(scene);
+        stage.show();
+        Conexion.CrearConexion();
+    }
 
     public void CrearUI() {
-        mitCalculadora = new MenuItem("Calculadora");
+        MenuItem mitCalculadora = new MenuItem("Calculadora");
         mitCalculadora.setOnAction(event -> new Calculadora());
-        mitLoteria = new MenuItem("Loteria");
+
+        MenuItem mitLoteria = new MenuItem("Loteria");
+        mitLoteria.setOnAction(event -> new Loteria());
+
+        MenuItem mitBuscaminas = new MenuItem("Buscaminas"); // Nuevo item de menú para Buscaminas
+        mitBuscaminas.setOnAction(event -> new Buscaminas()); // Asigna la acción para abrir Buscaminas
+
+        MenuItem mitSpotify = new MenuItem("Spotify");
+        mitSpotify.setOnAction(event -> new ListaClientes());
+
 
         menCompetencia1 = new Menu("Competencia 1");
-        menCompetencia1.getItems().addAll(mitCalculadora, mitLoteria);
+        menCompetencia1.getItems().addAll(mitCalculadora, mitLoteria,mitBuscaminas ,mitSpotify); // Añade Buscaminas al menú
+
         mnbPrincipal = new MenuBar(menCompetencia1);
         bdpPrincipal = new BorderPane();
         bdpPrincipal.setTop(mnbPrincipal);
     }
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        CrearUI();
-        Scene scene = new Scene(bdpPrincipal, 320, 240);
-        scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.show();
-    }
-
-    public static void main(String... args) {
+    public static void main(String[] args) {
         launch();
     }
 }

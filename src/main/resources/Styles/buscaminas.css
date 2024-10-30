@@ -1,0 +1,25 @@
+.vbox-centrado {
+    alignment: center;
+}
+
+.label-mensaje {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.grid-buscaminas {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #d3d3d3;
+}
+
+.button {
+    -fx-background-color: #9c9c9c;
+    -fx-border-color: #7b7b7b;
+}
+
+.boton-descubierto {
+    -fx-background-color: #c0e0ff;
+    -fx-border-color: #87b1cc;
+    -fx-text-fill: #000;
+}
