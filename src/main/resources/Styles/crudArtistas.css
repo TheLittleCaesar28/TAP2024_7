@@ -1,0 +1,91 @@
+/* crudArtistas.css */
+
+/* General background */
+.root {
+    -fx-background-color: #191414; /* Spotify dark background */
+    -fx-padding: 20;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+/* TableView styles */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #1DB954; /* Spotify green */
+    -fx-border-radius: 8px;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.3, 4, 4);
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #f1f3f5; /* Light gray hover effect */
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #cce5ff; /* Light blue for selected rows */
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #1DB954; /* Spotify green */
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 8px;
+    -fx-padding: 12 24;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.3, 2, 2);
+    -fx-transition: 0.3s ease-in-out;
+}
+
+.button:hover {
+    -fx-background-color: #1AA34A; /* Darker green */
+    -fx-scale-x: 1.05; /* Slight zoom effect */
+    -fx-scale-y: 1.05;
+}
+
+.button:pressed {
+    -fx-background-color: #18883F; /* Even darker green */
+    -fx-effect: none;
+}
+
+/* Text fields */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced4da; /* Light gray border */
+    -fx-border-radius: 8px;
+    -fx-padding: 12;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 3, 0.3, 1, 1);
+}
+
+.text-field:focused {
+    -fx-border-color: #80bdff; /* Blue focus */
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 123, 255, 0.5), 8, 0.3, 1, 1);
+}
+
+/* VBox styling */
+.vbox {
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-background-radius: 10px;
+    -fx-background-color: #222326; /* Spotify dark secondary */
+    -fx-border-color: #1DB954; /* Spotify green */
+    -fx-border-width: 2;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0.3, 0, 0);
+}
+
+/* Tooltip styles */
+.tooltip {
+    -fx-background-color: #1DB954; /* Spotify green */
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 5;
+}

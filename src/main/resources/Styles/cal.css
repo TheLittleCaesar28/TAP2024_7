@@ -1,22 +1,22 @@
-/* Estilo para todos los botones de la calculadora */
+
 .button {
     -fx-background-color: #ba4a00;
-    -fx-background-radius: 10; /* Ajuste para un borde más suave */
+    -fx-background-radius: 10;
     -fx-text-fill: white;
     -fx-border-color: black;
     -fx-border-radius: 10;
-    -fx-padding: 10; /* Padding uniforme */
-    -fx-font-size: 14px; /* Tamaño de fuente ajustado */
-    -fx-pref-width: 50px; /* Tamaño estándar de los botones */
-    -fx-pref-height: 50px; /* Tamaño estándar de los botones */
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
 }
 
-/* Estilo especial para el botón "Clear" */
+
 #font-button {
-    -fx-background-color: #e74c3c; /* Color rojo para destacar el botón "Clear" */
-    -fx-pref-width: 200px; /* Tamaño específico para el botón "Clear" */
-    -fx-pref-height: 50px; /* Altura del botón */
-    -fx-font: bold italic 16pt "Arial"; /* Fuente ajustada */
+    -fx-background-color: #e74c3c;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 50px;
+    -fx-font: bold italic 16pt
     -fx-text-fill: white;
     -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 0);
     -fx-background-radius: 10;

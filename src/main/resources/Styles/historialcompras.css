@@ -1,0 +1,52 @@
+/* Fondo principal de la aplicación */
+.root {
+    -fx-background-color: #191414; /* Fondo oscuro de Spotify */
+    -fx-padding: 20;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+/* Estilo general de la tabla */
+.table-view {
+    -fx-border-color: #1DB954; /* Verde Spotify */
+    -fx-border-radius: 5;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff; /* Fondo blanco dentro de la tabla */
+}
+
+/* Encabezados de la tabla */
+.table-view .column-header {
+    -fx-background-color: #1DB954; /* Verde para encabezados */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-alignment: center; /* Centrar texto de encabezados */
+}
+
+/* Celdas de la tabla */
+.table-view .cell {
+    -fx-padding: 8; /* Ajustar padding */
+    -fx-alignment: center-left; /* Alinear contenido a la izquierda */
+    -fx-background-color: #ffffff; /* Fondo blanco dentro de las celdas */
+    -fx-text-fill: black; /* Texto negro para legibilidad */
+}
+
+/* Fondo del VBox */
+.vbox {
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-background-color: #191414; /* Fondo oscuro del contenedor */
+}
+
+/* Ajuste de texto en celdas */
+.table-view .text {
+    -fx-font-size: 14px; /* Tamaño ajustado */
+    -fx-wrap-text: true; /* Ajustar texto que sea largo */
+}
+
+/* Placeholder cuando la tabla está vacía */
+.table-view .placeholder {
+    -fx-text-fill: #b3b3b3; /* Texto gris claro para el placeholder */
+    -fx-font-size: 16px;
+    -fx-font-style: italic;
+}

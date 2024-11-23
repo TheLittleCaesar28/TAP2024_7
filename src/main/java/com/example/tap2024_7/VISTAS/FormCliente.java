@@ -9,7 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
 public class FormCliente extends Stage {
     private Scene escena;
@@ -19,20 +18,19 @@ public class FormCliente extends Stage {
     private ClienteDAO objCliente;
     private TableView<ClienteDAO> tbvClientes;
 
-    public FormCliente(TableView<ClienteDAO> tbv, ClienteDAO objc){
+    public FormCliente(TableView<ClienteDAO> tbv, ClienteDAO objc) {
         tbvClientes = tbv;
         CrearUI();
         if (objc != null) {
-            this.objCliente =  objc;
+            this.objCliente = objc;
             txtNombre.setText(objCliente.getNomCte());
             txtEmail.setText(objCliente.getEmailCte());
             txtTelefono.setText(objCliente.getTelCte());
             this.setTitle("Editar Cliente");
-        }else {
+        } else {
             this.objCliente = new ClienteDAO();
-            this.setTitle("Insertar cliente");
+            this.setTitle("Insertar Cliente");
         }
-        this.setTitle("");
         this.setScene(escena);
         this.show();
     }
@@ -40,16 +38,25 @@ public class FormCliente extends Stage {
     private void CrearUI() {
         txtNombre = new TextField();
         txtNombre.setPromptText("Nombre del cliente");
+        txtNombre.getStyleClass().add("text-field");
+
         txtEmail = new TextField();
         txtEmail.setPromptText("Email del cliente");
+        txtEmail.getStyleClass().add("text-field");
+
         txtTelefono = new TextField();
-        txtTelefono.setPromptText("Telefono del cliente");
+        txtTelefono.setPromptText("Teléfono del cliente");
+        txtTelefono.getStyleClass().add("text-field");
+
         btnGuardar = new Button("Guardar");
+        btnGuardar.getStyleClass().add("button");
         btnGuardar.setOnAction(event -> GuardarCliente());
+
         vbox = new VBox(txtNombre, txtEmail, txtTelefono, btnGuardar);
-        vbox.setPadding(new Insets(10));
-        vbox.setSpacing(10);
-        escena = new Scene(vbox, 150, 150);
+        vbox.getStyleClass().add("vbox");
+
+        escena = new Scene(vbox, 400, 300);
+        escena.getStylesheets().add(getClass().getResource("/styles/formcliente.css").toExternalForm());
     }
 
     private void GuardarCliente() {
@@ -59,24 +66,27 @@ public class FormCliente extends Stage {
         String msj;
         Alert.AlertType type;
 
-        if (objCliente.getIdCte()>0){
+        if (objCliente.getIdCte() > 0) {
             objCliente.UPDATE();
+            msj = "Registro actualizado";
+            type = Alert.AlertType.INFORMATION;
         } else {
-            if (objCliente.INSERT() > 0){
-                msj= "Registro insertado";
+            if (objCliente.INSERT() > 0) {
+                msj = "Registro insertado";
                 type = Alert.AlertType.INFORMATION;
             } else {
-                msj = "Ocurrio un error al insertar";
+                msj = "Ocurrió un error al insertar";
                 type = Alert.AlertType.ERROR;
             }
-            Alert alerta = new Alert(type);
-            alerta.setTitle("Mensaje del Sistema");
-            alerta.setContentText(msj);
-            alerta.showAndWait();
         }
+
+        Alert alerta = new Alert(type);
+        alerta.setTitle("Mensaje del Sistema");
+        alerta.setContentText(msj);
+        alerta.showAndWait();
 
         tbvClientes.setItems(objCliente.SELECTALL());
         tbvClientes.refresh();
-
+        this.close();
     }
 }

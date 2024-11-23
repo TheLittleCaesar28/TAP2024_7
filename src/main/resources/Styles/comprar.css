@@ -1,0 +1,47 @@
+.root {
+    -fx-background-color: #191414; /* Fondo oscuro estilo Spotify */
+    -fx-padding: 20;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+/* TableView styles */
+.table-view {
+    -fx-background-color: #121212;
+    -fx-border-color: #1DB954; /* Azul estilo Bootstrap */
+    -fx-border-radius: 8px;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.3, 4, 4);
+}
+
+/* Botones */
+.button {
+    -fx-background-color: #1DB954; /* Verde Spotify */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 8px;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.3, 2, 2);
+}
+
+.button:hover {
+    -fx-background-color: #1AA34A; /* Verde más oscuro */
+}
+
+.label-mensaje {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* VBox styling */
+.vbox {
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-background-radius: 10px;
+    -fx-background-color: #222326; /* Fondo oscuro */
+    -fx-border-color: #1DB954; /* Verde Spotify */
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0.3, 0, 0);
+}

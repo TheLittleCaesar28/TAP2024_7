@@ -1,19 +1,17 @@
 package com.example.tap2024_7;
 
 import com.example.tap2024_7.MODELS.Conexion;
-import com.example.tap2024_7.VISTAS.Buscaminas; // Importa la clase Buscaminas
+import com.example.tap2024_7.VISTAS.Buscaminas;
 import com.example.tap2024_7.VISTAS.Calculadora;
 import com.example.tap2024_7.VISTAS.Loteria;
-import com.example.tap2024_7.VISTAS.ListaClientes;
+import com.example.tap2024_7.VISTAS.Login;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 public class HelloApplication extends Application {
 
@@ -22,33 +20,38 @@ public class HelloApplication extends Application {
     private Menu menCompetencia1;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         CrearUI();
         Scene scene = new Scene(bdpPrincipal, 800, 600);
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         stage.setTitle("Instituto Tecnológico de Celaya");
         stage.setScene(scene);
         stage.show();
-        Conexion.CrearConexion();
+        Conexion.CrearConexion(); // Conectar a la base de datos al inicio
     }
 
     public void CrearUI() {
+        // Menú Calculadora
         MenuItem mitCalculadora = new MenuItem("Calculadora");
         mitCalculadora.setOnAction(event -> new Calculadora());
 
+        // Menú Lotería
         MenuItem mitLoteria = new MenuItem("Loteria");
         mitLoteria.setOnAction(event -> new Loteria());
 
-        MenuItem mitBuscaminas = new MenuItem("Buscaminas"); // Nuevo item de menú para Buscaminas
-        mitBuscaminas.setOnAction(event -> new Buscaminas()); // Asigna la acción para abrir Buscaminas
+        // Menú Buscaminas
+        MenuItem mitBuscaminas = new MenuItem("Buscaminas");
+        mitBuscaminas.setOnAction(event -> new Buscaminas());
 
+        // Menú Spotify
         MenuItem mitSpotify = new MenuItem("Spotify");
-        mitSpotify.setOnAction(event -> new ListaClientes());
+        mitSpotify.setOnAction(event -> new Login()); // El Login se muestra al seleccionar Spotify
 
-
+        // Crear Menú Competencia 1
         menCompetencia1 = new Menu("Competencia 1");
-        menCompetencia1.getItems().addAll(mitCalculadora, mitLoteria,mitBuscaminas ,mitSpotify); // Añade Buscaminas al menú
+        menCompetencia1.getItems().addAll(mitCalculadora, mitLoteria, mitBuscaminas, mitSpotify);
 
+        // Configurar barra de menú principal
         mnbPrincipal = new MenuBar(menCompetencia1);
         bdpPrincipal = new BorderPane();
         bdpPrincipal.setTop(mnbPrincipal);

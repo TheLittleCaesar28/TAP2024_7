@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Calculadora extends Stage {
+public class Calculadora extends Stage{
     private Button[][] arBtns;
     private Button btnClear;
     private TextField txtPantalla;

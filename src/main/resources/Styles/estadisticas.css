@@ -1,0 +1,56 @@
+/* General background */
+.root {
+    -fx-background-color: #191414; /* Fondo oscuro estilo Spotify */
+    -fx-padding: 20;
+    -fx-font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+/* VBox styling */
+.vbox {
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-background-radius: 10px;
+    -fx-background-color: #222326; /* Fondo oscuro ligeramente diferente */
+    -fx-border-color: #1DB954; /* Verde Spotify */
+    -fx-border-width: 2;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0.3, 0, 0);
+}
+
+/* Title styling */
+.label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1DB954; /* Verde Spotify */
+    -fx-padding: 10;
+    -fx-text-alignment: center;
+}
+
+/* Pie chart container */
+.chart-pie {
+    -fx-border-color: #1DB954; /* Verde Spotify */
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.3, 4, 4);
+    -fx-padding: 20;
+    -fx-background-color: #191414; /* Fondo oscuro para contraste */
+}
+
+/* Pie chart title */
+.chart-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff; /* Blanco */
+}
+
+/* Pie chart legend */
+.chart-legend {
+    -fx-text-fill: #ffffff; /* Blanco para la leyenda */
+    -fx-font-size: 14px;
+}
+
+/* Pie chart slices */
+.chart-pie .chart-pie-area {
+    -fx-stroke: #000000; /* Contorno negro */
+    -fx-stroke-width: 2px;
+}

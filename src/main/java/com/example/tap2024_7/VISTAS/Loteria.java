@@ -30,10 +30,11 @@ public class Loteria extends Stage {
     private Set<Button> cartasMarcadas = new HashSet<>();
     private int plantillaActual = 0;
     private Timer timer;
-    private int tiempoRestante = 10;
+    private int tiempoRestante = 5;
     private String cartaActual;
-    private boolean juegoActivo = false; // Indicador de estado del juego
-    private boolean temporizadorIniciado = false; // Control para iniciar temporizador tras la primera carta
+    private boolean juegoActivo = false;
+    private boolean temporizadorIniciado = false;
+    private boolean mensajeMostrado = false;
 
     public Loteria() {
         CrearUI();
@@ -46,7 +47,6 @@ public class Loteria extends Stage {
         gdpTablilla = new GridPane();
         CrearTablillas();
 
-        // Mostrar la primera plantilla en pantalla al iniciar el juego
         mostrarPlantilla(0);
 
         Button btnAnterior = new Button("Anterior");
@@ -73,7 +73,7 @@ public class Loteria extends Stage {
     }
 
     private void CrearMazo() {
-        lblTimer = new Label("00:10");
+        lblTimer = new Label("00:05");
         lblTimer.getStyleClass().add("lbl-timer");
 
         imvMazo = new ImageView(new Image(getClass().getResource("/images/dorso.jpeg").toString()));
@@ -123,15 +123,15 @@ public class Loteria extends Stage {
     }
 
     private void mostrarPlantillaAnterior() {
-        if (juegoActivo) return; // Solo permite cambiar si el juego no está activo
-        int nuevaPlantilla = (plantillaActual == 0) ? plantillas.size() - 1 : plantillaActual - 1;
-        mostrarPlantilla(nuevaPlantilla);
+        if (juegoActivo) return;
+        plantillaActual = (plantillaActual - 1 + plantillas.size()) % plantillas.size();
+        mostrarPlantilla(plantillaActual);
     }
 
     private void mostrarPlantillaSiguiente() {
-        if (juegoActivo) return; // Solo permite cambiar si el juego no está activo
-        int nuevaPlantilla = (plantillaActual + 1) % plantillas.size();
-        mostrarPlantilla(nuevaPlantilla);
+        if (juegoActivo) return;
+        plantillaActual = (plantillaActual + 1) % plantillas.size();
+        mostrarPlantilla(plantillaActual);
     }
 
     private void iniciarJuego() {
@@ -139,12 +139,13 @@ public class Loteria extends Stage {
             timer.cancel();
         }
         cartasMarcadas.clear();
-        tiempoRestante = 10;
-        lblTimer.setText("00:10");
+        tiempoRestante = 5;
+        lblTimer.setText("00:05");
         prepararColaCartas();
         juegoActivo = true;
-        temporizadorIniciado = false; // Temporizador aún no empieza
-        cambiarCarta(); // Muestra la primera carta y empieza el temporizador
+        temporizadorIniciado = false;
+        mensajeMostrado = false;
+        cambiarCarta();
     }
 
     private void prepararColaCartas() {
@@ -155,19 +156,23 @@ public class Loteria extends Stage {
 
     private void cambiarCarta() {
         if (colaCartas.isEmpty()) {
-            mostrarMensaje("Juego Terminado", "Has perdido.");
-            juegoActivo = false;
+            if (!mensajeMostrado) {
+                terminarJuego();
+                mostrarMensaje("Juego Terminado", "Has perdido.");
+                mensajeMostrado = true;
+            }
             return;
         }
 
         cartaActual = colaCartas.poll();
         imvMazo.setImage(new Image(getClass().getResource("/images/" + cartaActual).toString()));
 
-        if (!temporizadorIniciado) { // Iniciar el temporizador tras mostrar la primera carta
+        if (!temporizadorIniciado) {
             temporizadorIniciado = true;
             iniciarTemporizador();
         }
     }
+
 
     private void iniciarTemporizador() {
         timer = new Timer();
@@ -182,7 +187,7 @@ public class Loteria extends Stage {
                         lblTimer.setText(String.format("00:%02d", tiempoRestante));
                     } else {
                         cambiarCarta();
-                        tiempoRestante = 10;
+                        tiempoRestante = 5;
                     }
                 });
             }
@@ -194,13 +199,21 @@ public class Loteria extends Stage {
             btn.setStyle("-fx-background-color: green;");
             cartasMarcadas.add(btn);
 
-            if (cartasMarcadas.size() == 16) {
+            if (cartasMarcadas.size() == 16 && !mensajeMostrado) {
                 mostrarMensaje("¡Ganaste!", "¡Felicidades, has ganado el juego!");
-                timer.cancel();
-                juegoActivo = false;
+                mensajeMostrado = true;
+                terminarJuego();
             }
         }
     }
+    private void terminarJuego() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        juegoActivo = false;
+        temporizadorIniciado = false;
+    }
+
 
     private void mostrarMensaje(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

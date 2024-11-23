@@ -1,17 +1,16 @@
 .root {
-    /* Fondo de la aplicación y header */
+
     -fx-background-image: url("../images/Wallpaper.jpg"), url("../images/header.png");
 
-    /* Fondo que cubra toda el área */
-    -fx-background-size: cover, auto; /* 'cover' para el fondo, 'auto' para mantener el tamaño del header */
+    -fx-background-size: cover, auto;
 
-    /* El fondo debe estar centrado, el header arriba */
-    -fx-background-position: center, top; /* Fondo centrado, header arriba */
 
-    /* Evitar repeticiones de ambas imágenes */
+    -fx-background-position: center, top;
+
+
     -fx-background-repeat: no-repeat, no-repeat;
 
-    /* Ajuste de padding/márgenes si es necesario */
-    -fx-padding: 0; /* Elimina espacios alrededor */
+
+    -fx-padding: 0;
     -fx-margin: 0;
 }

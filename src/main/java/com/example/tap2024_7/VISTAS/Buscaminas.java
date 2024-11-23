@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Buscaminas extends Stage {
@@ -64,9 +63,11 @@ public class Buscaminas extends Stage {
         gridPane.getChildren().clear();
         int cantidadBombas;
 
-        try {
-            cantidadBombas = Integer.parseInt(txtBombas.getText());
-        } catch (NumberFormatException e) {
+        String bombasText = txtBombas.getText();
+
+        if (bombasText.matches("\\d+")) {
+            cantidadBombas = Integer.parseInt(bombasText);
+        } else {
             lblMensaje.setText("Por favor, introduce un número válido.");
             return;
         }
@@ -144,7 +145,11 @@ public class Buscaminas extends Stage {
             btn.setStyle("");
             marcadas[fila][columna] = false;
         } else {
-            btn.setStyle("-fx-background-image: url('/images/bandera.png'); -fx-background-size: 25px 25px;");
+            String banderaUrl = getClass().getResource("/images/banderita.png").toExternalForm();
+            btn.setStyle("-fx-background-image: url('" + banderaUrl + "'); " +
+                    "-fx-background-size: 25px 25px; " +
+                    "-fx-background-repeat: no-repeat; " +
+                    "-fx-background-position: center;");
             marcadas[fila][columna] = true;
         }
     }
