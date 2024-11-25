@@ -18,7 +18,6 @@ public class CancionDAO {
     private final StringProperty albumNombre = new SimpleStringProperty();
     private String albumImagenRuta;
 
-    // Getters y Setters
     public int getIdCancion() {
         return idCancion.get();
     }
@@ -89,24 +88,34 @@ public class CancionDAO {
 
     // Métodos CRUD
     public void INSERT() {
-        String query = "INSERT INTO Canciones (nombreCancion, precio, idAlbum) VALUES (?, ?, ?)";
+        // Verificar si el idAlbum existe en la tabla 'albumes'
+        String verificarQuery = "SELECT COUNT(*) FROM albumes WHERE idAlbum = ?";
+        String insertarQuery = "INSERT INTO canciones (nombreCancion, precio, idAlbum) VALUES (?, ?, ?)";
+
         try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+             PreparedStatement verificarStmt = conn.prepareStatement(verificarQuery);
+             PreparedStatement insertarStmt = conn.prepareStatement(insertarQuery)) {
 
-            stmt.setString(1, getNombreCancion());
-            stmt.setDouble(2, getPrecio());
-            stmt.setInt(3, getIdAlbum());
-
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Canción insertada correctamente.");
-            } else {
-                System.err.println("Error al insertar la canción.");
+            // Validar si el idAlbum existe
+            verificarStmt.setInt(1, getIdAlbum());
+            ResultSet rs = verificarStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) == 0) {
+                System.err.println("Error: idAlbum no existe en la tabla 'albumes'.");
+                return; // Salir si el idAlbum no es válido
             }
+
+            // Si es válido, proceder a insertar la canción
+            insertarStmt.setString(1, getNombreCancion());
+            insertarStmt.setDouble(2, getPrecio());
+            insertarStmt.setInt(3, getIdAlbum());
+            insertarStmt.executeUpdate();
+
+            System.out.println("Canción insertada correctamente.");
         } catch (Exception e) {
             System.err.println("Error en INSERT: " + e.getMessage());
         }
     }
+
 
 
     public static ObservableList<CancionDAO> SELECTALL() {

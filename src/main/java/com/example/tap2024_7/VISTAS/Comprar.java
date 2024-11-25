@@ -143,8 +143,9 @@ public class Comprar extends Stage {
         Button btnImprimirPDF = new Button("Imprimir PDF");
         btnImprimirPDF.setOnAction(event -> {
             OrdenComprarPDF reporte = new OrdenComprarPDF();
-            reporte.imprimirOrden(carrito, totalCompra);
+            reporte.imprimirOrden(carrito, totalCompra); // Pasar el Stage actual
         });
+
         btnImprimirPDF.getStyleClass().add("button");
 
         HBox botones = new HBox(20, btnPagar, btnImprimirPDF);
@@ -175,7 +176,7 @@ public class Comprar extends Stage {
         alert.setTitle("Compra Realizada");
         alert.setContentText("¡Tu compra ha sido procesada correctamente!");
         alert.showAndWait();
-        this.close();
+
     }
 
 }

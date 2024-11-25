@@ -12,6 +12,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class CRUDAlbumes extends Stage {
 
@@ -57,13 +59,13 @@ public class CRUDAlbumes extends Stage {
                     setGraphic(null);
                 } else {
                     AlbumDAO album = getTableView().getItems().get(getIndex());
-                    String rutaImagen = album.getRutaImagen();
-                    if (rutaImagen != null && !rutaImagen.isEmpty()) {
-                        File archivoImagen = new File(rutaImagen);
+                    String nombreImagen = album.getRutaImagen(); // Solo nombre del archivo
+                    if (nombreImagen != null && !nombreImagen.isEmpty()) {
+                        File archivoImagen = new File("C:\\Users\\eduar\\OneDrive\\Escritorio\\ITC\\7mo Semestre\\Tópicos Avanzados de Programación\\Albumes\\" + nombreImagen); // Ruta relativa al proyecto
                         if (archivoImagen.exists()) {
                             imageView.setImage(new Image(archivoImagen.toURI().toString(), 50, 50, true, true));
                         } else {
-                            imageView.setImage(new Image("file:/ruta/a/placeholder.jpg", 50, 50, true, true)); // Imagen por defecto
+                            imageView.setImage(new Image("file:imagenes/placeholder.jpg", 50, 50, true, true)); // Imagen por defecto
                         }
                     }
                     setGraphic(imageView);
@@ -152,7 +154,18 @@ public class CRUDAlbumes extends Stage {
         }
 
         if (archivoImagen != null) {
-            album.setRutaImagen(archivoImagen.getAbsolutePath()); // Guardar ruta de la imagen
+            String nombreImagen = archivoImagen.getName(); // Solo el nombre del archivo
+            album.setRutaImagen(nombreImagen);
+
+            // Mueve la imagen a la carpeta del proyecto
+            File destino = new File("imagenes/" + nombreImagen);
+            if (!destino.exists()) {
+                try {
+                    Files.copy(archivoImagen.toPath(), destino.toPath());
+                } catch (IOException e) {
+                    mostrarAlerta("Error", "No se pudo mover la imagen", e.getMessage());
+                }
+            }
         }
         album.INSERT();
         actualizarTabla();
@@ -167,7 +180,17 @@ public class CRUDAlbumes extends Stage {
                 seleccionado.setIdArtista(artistaSeleccionado.getIdArtista());
             }
             if (archivoImagen != null) {
-                seleccionado.setRutaImagen(archivoImagen.getAbsolutePath()); // Actualizar ruta
+                String nombreImagen = archivoImagen.getName();
+                seleccionado.setRutaImagen(nombreImagen);
+
+                File destino = new File("imagenes/" + nombreImagen);
+                if (!destino.exists()) {
+                    try {
+                        Files.copy(archivoImagen.toPath(), destino.toPath());
+                    } catch (IOException e) {
+                        mostrarAlerta("Error", "No se pudo mover la imagen", e.getMessage());
+                    }
+                }
             }
             seleccionado.UPDATE();
             actualizarTabla();
