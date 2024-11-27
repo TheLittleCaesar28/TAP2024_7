@@ -10,7 +10,6 @@ import java.sql.Statement;
 
 public class UsuarioDAO {
 
-    // Propiedades
     private int idUsuario;
     private StringProperty nombreUsuario = new SimpleStringProperty();
     private StringProperty password = new SimpleStringProperty();
@@ -18,7 +17,6 @@ public class UsuarioDAO {
     private StringProperty email = new SimpleStringProperty();
     private StringProperty telefono = new SimpleStringProperty();
 
-    // Getters y Setters
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -87,13 +85,11 @@ public class UsuarioDAO {
         this.telefono.set(telefono);
     }
 
-    // Métodos CRUD
-
     public ObservableList<UsuarioDAO> SELECTALL() {
         ObservableList<UsuarioDAO> lista = FXCollections.observableArrayList();
         String query = "SELECT * FROM Usuarios";
         try {
-            Statement stmt = Conexion.getConnection().createStatement(); // Usar getConnection()
+            Statement stmt = Conexion.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 UsuarioDAO usuario = new UsuarioDAO();
@@ -114,7 +110,7 @@ public class UsuarioDAO {
     public boolean validarUsuario(String usuario, String password) {
         String query = "SELECT * FROM Usuarios WHERE nombreUsuario = '" + usuario + "' AND password = '" + password + "'";
         try {
-            Statement stmt = Conexion.getConnection().createStatement(); // Usar getConnection()
+            Statement stmt = Conexion.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
             if (rs.next()) {
                 this.idUsuario = rs.getInt("idUsuario");
@@ -134,7 +130,7 @@ public class UsuarioDAO {
         String query = "INSERT INTO Usuarios (nombreUsuario, password, tipoUsuario, email, telefono) VALUES " +
                 "('" + getNombreUsuario() + "', '" + getPassword() + "', '" + getTipoUsuario() + "', '" + getEmail() + "', '" + getTelefono() + "')";
         try {
-            Statement stmt = Conexion.getConnection().createStatement(); // Usar getConnection()
+            Statement stmt = Conexion.getConnection().createStatement();
             stmt.executeUpdate(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,7 +143,7 @@ public class UsuarioDAO {
                 "', email = '" + getEmail() + "', telefono = '" + getTelefono() +
                 "' WHERE idUsuario = " + getIdUsuario();
         try {
-            Statement stmt = Conexion.getConnection().createStatement(); // Usar getConnection()
+            Statement stmt = Conexion.getConnection().createStatement();
             stmt.executeUpdate(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,7 +153,7 @@ public class UsuarioDAO {
     public void DELETE() {
         String query = "DELETE FROM Usuarios WHERE idUsuario = " + getIdUsuario();
         try {
-            Statement stmt = Conexion.getConnection().createStatement(); // Usar getConnection()
+            Statement stmt = Conexion.getConnection().createStatement();
             stmt.executeUpdate(query);
         } catch (Exception e) {
             e.printStackTrace();

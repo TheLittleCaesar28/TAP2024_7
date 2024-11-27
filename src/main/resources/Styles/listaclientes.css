@@ -1,51 +1,38 @@
-/* listaclientes.css */
 
-/* General styling */
 .root {
-    -fx-background-color: #f8f9fa; /* Bootstrap light gray */
+    -fx-background-color: #f8f9fa;
     -fx-padding: 20;
     -fx-font-family: 'Arial', sans-serif;
 }
-
-/* VBox styling */
 .vbox {
     -fx-spacing: 15;
     -fx-padding: 15;
     -fx-background-color: white;
     -fx-border-radius: 10px;
-    -fx-border-color: #007bff; /* Bootstrap blue */
+    -fx-border-color: #007bff;
     -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.3, 0, 0);
 }
-
-/* ToolBar styling */
 .tool-bar {
-    -fx-background-color: #007bff; /* Bootstrap blue */
+    -fx-background-color: #007bff;
     -fx-padding: 10;
 }
-
-/* Button styling */
 .button {
-    -fx-background-color: #28a745; /* Bootstrap green */
+    -fx-background-color: #28a745;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 12px;
     -fx-border-radius: 5px;
     -fx-padding: 5 10;
 }
-
 .button:hover {
-    -fx-background-color: #218838; /* Darker green for hover */
+    -fx-background-color: #218838;
 }
-
-/* TableView styling */
 .table-view {
     -fx-background-color: white;
-    -fx-border-color: #dee2e6; /* Bootstrap border gray */
+    -fx-border-color: #dee2e6;
     -fx-border-radius: 5px;
     -fx-padding: 5;
 }
-
-/* TableColumn header styling */
 .table-view .column-header {
-    -fx-background-color: #007bff; /* Bootstrap b
+    -fx-background-color: #007bff;

@@ -8,11 +8,9 @@ import javafx.stage.Stage;
 public class SpotifyDashboard extends Stage {
 
     public SpotifyDashboard() {
-        // Crear VBox contenedor principal
         VBox vbox = new VBox(15);
         vbox.getStyleClass().add("vbox");
 
-        // Botones con opciones del Dashboard
         Button btnUsuarios = new Button("Gestionar Usuarios");
         btnUsuarios.getStyleClass().add("button");
         btnUsuarios.setOnAction(event -> new CRUDUsuarios());
@@ -33,14 +31,11 @@ public class SpotifyDashboard extends Stage {
         btnEstadisticas.getStyleClass().add("button");
         btnEstadisticas.setOnAction(event -> new Estadisticas());
 
-        // Añadir botones al contenedor VBox
         vbox.getChildren().addAll(btnUsuarios, btnAlbumes, btnCanciones, btnArtistas, btnEstadisticas);
 
-        // Configurar la escena con la hoja de estilos
         Scene scene = new Scene(vbox, 500, 700);
         scene.getStylesheets().add(getClass().getResource("/styles/spotify.css").toExternalForm());
 
-        // Configurar la ventana
         this.setScene(scene);
         this.setTitle("Dashboard - Spotify");
         this.show();

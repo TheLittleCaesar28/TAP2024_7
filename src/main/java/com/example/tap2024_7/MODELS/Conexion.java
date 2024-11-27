@@ -5,12 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    private static final String URL = "jdbc:mysql://localhost:3306/Spotify"; // Cambia 'Spotify' al nombre correcto de tu base de datos
-    private static final String USER = "admin"; // Tu usuario de MySQL
-    private static final String PASSWORD = "123"; // Tu contraseña de MySQL
+    private static final String URL = "jdbc:mysql://localhost:3306/Spotify";
+    private static final String USER = "admin";
+    private static final String PASSWORD = "123";
     private static Connection connection = null;
 
-    // Crear la conexión inicial
     public static void CrearConexion() {
         try {
             if (connection == null || connection.isClosed()) {
@@ -23,11 +22,10 @@ public class Conexion {
         }
     }
 
-    // Obtener la conexión
     public static Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                CrearConexion(); // Reintenta conectar si la conexión estaba cerrada o nula
+                CrearConexion();
             }
         } catch (SQLException e) {
             System.err.println("Error al comprobar la conexión: " + e.getMessage());
@@ -36,7 +34,6 @@ public class Conexion {
         return connection;
     }
 
-    // Cerrar la conexión si es necesario
     public static void cerrarConexion() {
         try {
             if (connection != null && !connection.isClosed()) {

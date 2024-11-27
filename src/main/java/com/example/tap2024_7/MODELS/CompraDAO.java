@@ -14,7 +14,6 @@ public class CompraDAO {
     private Double totalCompra;
     private ObservableList<String> cancionesCompradas;
 
-    // Getters y Setters
     public Integer getIdCompra() {
         return idCompra;
     }
@@ -55,7 +54,6 @@ public class CompraDAO {
         this.cancionesCompradas = cancionesCompradas;
     }
 
-    // Método para convertir canciones a texto concatenado
     public String getCancionesCompradasTexto() {
         if (cancionesCompradas == null || cancionesCompradas.isEmpty()) {
             return "Sin canciones"; // Mostrar un texto predeterminado si no hay canciones
@@ -63,7 +61,6 @@ public class CompraDAO {
         return String.join(", ", cancionesCompradas); // Concatenar las canciones con comas
     }
 
-    // Método SELECTALL para obtener el historial de compras por usuario
     public ObservableList<CompraDAO> SELECTALL(int idUsuario) {
         ObservableList<CompraDAO> lista = FXCollections.observableArrayList();
         String query = """
@@ -86,7 +83,6 @@ public class CompraDAO {
                 compra.setFechaCompra(rs.getString("fechaCompra"));
                 compra.setTotalCompra(rs.getDouble("totalCompra"));
 
-                // Validar si cancionesCompradas es nulo antes de dividirlo
                 String canciones = rs.getString("cancionesCompradas");
                 if (canciones != null && !canciones.trim().isEmpty()) {
                     compra.setCancionesCompradas(
@@ -104,7 +100,6 @@ public class CompraDAO {
         return lista;
     }
 
-    // Método para obtener ventas por mes
     public Map<String, Integer> obtenerVentasPorMes() {
         Map<String, Integer> ventasPorMes = new HashMap<>();
         String query = """
@@ -133,14 +128,12 @@ public class CompraDAO {
         return meses[mes - 1];
     }
 
-    // Método INSERT para registrar una nueva compra
     public int INSERT(int idUsuario) {
         String query = "INSERT INTO Compras (idUsuario, fechaCompra) VALUES (?, NOW())";
         try (PreparedStatement stmt = Conexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, idUsuario);
             stmt.executeUpdate();
 
-            // Obtener el ID generado de la compra
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 return rs.getInt(1);
@@ -148,10 +141,9 @@ public class CompraDAO {
         } catch (Exception e) {
             System.err.println("Error al insertar la compra: " + e.getMessage());
         }
-        return -1; // Indicar que no se pudo insertar
+        return -1;
     }
 
-    // Método para insertar detalles de una compra
     public void insertDetalle(int idCompra, int idCancion) {
         String query = "INSERT INTO CompraDetalle (idCompra, idCancion) VALUES (?, ?)";
         try (PreparedStatement stmt = Conexion.getConnection().prepareStatement(query)) {

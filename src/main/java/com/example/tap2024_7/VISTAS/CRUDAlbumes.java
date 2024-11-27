@@ -39,15 +39,12 @@ public class CRUDAlbumes extends Stage {
         tbvAlbumes = new TableView<>();
         tbvAlbumes.getStyleClass().add("table-view");
 
-        // Columna: Nombre del Álbum
         TableColumn<AlbumDAO, String> colNombre = new TableColumn<>("Nombre del Álbum");
         colNombre.setCellValueFactory(c -> c.getValue().nombreAlbumProperty());
 
-        // Columna: Artista
         TableColumn<AlbumDAO, String> colArtista = new TableColumn<>("Artista");
         colArtista.setCellValueFactory(c -> c.getValue().nombreArtistaProperty());
 
-        // Columna: Imagen
         TableColumn<AlbumDAO, Void> colImagen = new TableColumn<>("Imagen");
         colImagen.setCellFactory(param -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
@@ -76,11 +73,9 @@ public class CRUDAlbumes extends Stage {
         tbvAlbumes.getColumns().addAll(colNombre, colArtista, colImagen);
         tbvAlbumes.setItems(new AlbumDAO().SELECTALL());
 
-        // Campos de texto
         txtNombre = new TextField();
         txtNombre.setPromptText("Nombre del Álbum");
 
-        // ComboBox de artistas
         cbArtistas = new ComboBox<>();
         cbArtistas.setPromptText("Selecciona un Artista");
         cbArtistas.setItems(new ArtistaDAO().SELECTALL());
@@ -99,13 +94,11 @@ public class CRUDAlbumes extends Stage {
             }
         });
 
-        // Imagen
         imgAlbum = new ImageView();
         imgAlbum.setFitHeight(150);
         imgAlbum.setFitWidth(150);
         imgAlbum.getStyleClass().add("image-view");
 
-        // Botones
         btnCargarImagen = new Button("Cargar Imagen");
         btnCargarImagen.setOnAction(e -> cargarImagen());
         btnCargarImagen.getStyleClass().add("button");
@@ -154,10 +147,9 @@ public class CRUDAlbumes extends Stage {
         }
 
         if (archivoImagen != null) {
-            String nombreImagen = archivoImagen.getName(); // Solo el nombre del archivo
+            String nombreImagen = archivoImagen.getName();
             album.setRutaImagen(nombreImagen);
 
-            // Mueve la imagen a la carpeta del proyecto
             File destino = new File("imagenes/" + nombreImagen);
             if (!destino.exists()) {
                 try {

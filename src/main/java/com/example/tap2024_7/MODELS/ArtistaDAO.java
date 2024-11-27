@@ -14,7 +14,6 @@ public class ArtistaDAO {
     private int idArtista;
     private StringProperty nombreArtista = new SimpleStringProperty();
 
-    // Getters y setters
     public int getIdArtista() {
         return idArtista;
     }
@@ -35,13 +34,11 @@ public class ArtistaDAO {
         this.nombreArtista.set(nombreArtista);
     }
 
-    // Sobrescribir el método toString para mostrar el nombre del artista
     @Override
     public String toString() {
         return this.getNombreArtista();
     }
 
-    // Método SELECTALL
     public ObservableList<ArtistaDAO> SELECTALL() {
         ObservableList<ArtistaDAO> lista = FXCollections.observableArrayList();
         String query = "SELECT * FROM Artistas";
@@ -64,7 +61,6 @@ public class ArtistaDAO {
         return lista;
     }
 
-    // Método INSERT
     public void INSERT() {
         String query = "INSERT INTO Artistas (nombreArtista) VALUES (?)";
 
@@ -80,7 +76,6 @@ public class ArtistaDAO {
         }
     }
 
-    // Método UPDATE
     public void UPDATE() {
         String query = "UPDATE Artistas SET nombreArtista = ? WHERE idArtista = ?";
 
@@ -97,7 +92,6 @@ public class ArtistaDAO {
         }
     }
 
-    // Método DELETE
     public void DELETE() {
         String query = "DELETE FROM Artistas WHERE idArtista = ?";
 

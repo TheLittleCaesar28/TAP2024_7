@@ -27,7 +27,6 @@ public class Login extends Stage {
         CrearUI();
         this.setTitle("Login - Spotify");
 
-        // Crear escena y asignar estilos
         Scene scene = new Scene(root, 500, 700);
         scene.getStylesheets().add(getClass().getResource("/styles/spotify.css").toExternalForm());
         this.setScene(scene);
@@ -35,20 +34,17 @@ public class Login extends Stage {
     }
 
     private void CrearUI() {
-        // Logo
         ImageView logo = new ImageView(new Image(getClass().getResource("/images/spoti.jpg").toExternalForm()));
         logo.setFitHeight(120);
         logo.setPreserveRatio(true);
         logo.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.3, 0, 0);");
 
-        // Título
         Label title = new Label("Spotify");
         title.setStyle("-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;");
 
         VBox header = new VBox(10, logo, title);
         header.setAlignment(Pos.CENTER);
 
-        // Crear campos de texto
         txtUsuario = new TextField();
         txtUsuario.setPromptText("Nombre de Usuario");
         txtUsuario.getStyleClass().add("text-field");
@@ -57,29 +53,23 @@ public class Login extends Stage {
         txtPassword.setPromptText("Contraseña");
         txtPassword.getStyleClass().add("password-field");
 
-        // Crear botón de ingreso
         btnIngresar = new Button("Ingresar");
         btnIngresar.getStyleClass().add("button");
         btnIngresar.setOnAction(event -> validarCredenciales());
 
-        // Centrar el botón
         HBox buttonContainer = new HBox(btnIngresar);
         buttonContainer.setAlignment(Pos.CENTER);
 
-        // Configurar GridPane para el formulario
         GridPane form = new GridPane();
         form.setVgap(15);
         form.setAlignment(Pos.CENTER);
         form.add(txtUsuario, 0, 0);
         form.add(txtPassword, 0, 1);
-        form.add(buttonContainer, 0, 2); // Usar el contenedor del botón
+        form.add(buttonContainer, 0, 2);
 
-        // Estilo del formulario
         StackPane formContainer = new StackPane(form);
-        //formContainer.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-border-radius: 15; -fx-padding: 20; -fx-border-color: #1DB954; -fx-border-width: 2;");
 
-        // Contenedor principal
-        root = new VBox(40, header, formContainer); // Aumentar espacio entre elementos
+        root = new VBox(40, header, formContainer);
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-padding: 20; -fx-background-color: #191414;");
     }
@@ -92,13 +82,12 @@ public class Login extends Stage {
         UsuarioDAO userDAO = new UsuarioDAO();
         if (userDAO.validarUsuario(usuario, password)) {
             if (userDAO.getTipoUsuario().equals("Administrador")) {
-                new AdminDashboard(); // Redirige al dashboard de administrador
+                new AdminDashboard();
             } else {
-                new UserDashboard(userDAO); // Redirige al dashboard de usuario
+                new UserDashboard(userDAO);
             }
             this.close();
         } else {
-            // Mostrar alerta de error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error de autenticación");
             alert.setContentText("Usuario o contraseña incorrectos.");

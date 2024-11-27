@@ -33,11 +33,9 @@ public class HistorialCompras extends Stage {
     }
 
     private void CrearUI(int idUsuario) {
-        // Inicializar TableView
         tbvHistorial = new TableView<>();
         tbvHistorial.getStyleClass().add("table-view");
 
-        // Configurar columnas
         TableColumn<CompraDAO, Integer> colIdCompra = new TableColumn<>("ID Compra");
         colIdCompra.setCellValueFactory(new PropertyValueFactory<>("idCompra"));
         colIdCompra.setPrefWidth(100);
@@ -51,15 +49,14 @@ public class HistorialCompras extends Stage {
         colTotal.setPrefWidth(100);
 
         TableColumn<CompraDAO, String> colCanciones = new TableColumn<>("Canciones Compradas");
-        colCanciones.setCellValueFactory(new PropertyValueFactory<>("cancionesCompradasTexto")); // Mostrar como texto
+        colCanciones.setCellValueFactory(new PropertyValueFactory<>("cancionesCompradasTexto"));
         colCanciones.setPrefWidth(400);
 
-        // Personalizar celdas para mostrar el texto completo con salto de línea
         colCanciones.setCellFactory(tc -> new TableCell<>() {
             private final Text text = new Text();
 
             {
-                text.getStyleClass().add("text"); // Estilo definido en CSS
+                text.getStyleClass().add("text");
             }
 
             @Override
@@ -75,32 +72,27 @@ public class HistorialCompras extends Stage {
             }
         });
 
-        // Centrar las demás columnas
         centrarColumna(colIdCompra);
         centrarColumna(colFecha);
         centrarColumna(colTotal);
 
-        // Agregar columnas al TableView
         tbvHistorial.getColumns().addAll(colIdCompra, colFecha, colTotal, colCanciones);
 
-        // Cargar datos en la tabla
         CompraDAO compraDAO = new CompraDAO();
         tbvHistorial.setItems(compraDAO.SELECTALL(idUsuario));
 
-        // Evitar mostrar filas vacías
         Text emptyText = new Text("No hay compras registradas.");
         emptyText.getStyleClass().add("text");
         tbvHistorial.setPlaceholder(emptyText);
 
         tbvHistorial.setRowFactory(tv -> {
             TableRow<CompraDAO> row = new TableRow<>();
-            row.setStyle("-fx-padding: 5;"); // Espaciado interno en las filas
-            row.setPrefHeight(40); // Altura de fila ajustada
+            row.setStyle("-fx-padding: 5;");
+            row.setPrefHeight(40);
             return row;
         });
     }
 
-    // Método para centrar las columnas
     private <T> void centrarColumna(TableColumn<CompraDAO, T> column) {
         column.setCellFactory(tc -> new TableCell<>() {
             @Override
@@ -111,7 +103,7 @@ public class HistorialCompras extends Stage {
                 } else {
                     setText(item.toString());
                 }
-                setAlignment(Pos.CENTER); // Centrar el contenido
+                setAlignment(Pos.CENTER);
             }
         });
     }

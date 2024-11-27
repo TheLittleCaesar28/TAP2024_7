@@ -86,9 +86,7 @@ public class CancionDAO {
         this.albumImagenRuta = albumImagenRuta;
     }
 
-    // Métodos CRUD
     public void INSERT() {
-        // Verificar si el idAlbum existe en la tabla 'albumes'
         String verificarQuery = "SELECT COUNT(*) FROM albumes WHERE idAlbum = ?";
         String insertarQuery = "INSERT INTO canciones (nombreCancion, precio, idAlbum) VALUES (?, ?, ?)";
 
@@ -96,15 +94,13 @@ public class CancionDAO {
              PreparedStatement verificarStmt = conn.prepareStatement(verificarQuery);
              PreparedStatement insertarStmt = conn.prepareStatement(insertarQuery)) {
 
-            // Validar si el idAlbum existe
             verificarStmt.setInt(1, getIdAlbum());
             ResultSet rs = verificarStmt.executeQuery();
             if (rs.next() && rs.getInt(1) == 0) {
                 System.err.println("Error: idAlbum no existe en la tabla 'albumes'.");
-                return; // Salir si el idAlbum no es válido
+                return;
             }
 
-            // Si es válido, proceder a insertar la canción
             insertarStmt.setString(1, getNombreCancion());
             insertarStmt.setDouble(2, getPrecio());
             insertarStmt.setInt(3, getIdAlbum());
@@ -115,7 +111,6 @@ public class CancionDAO {
             System.err.println("Error en INSERT: " + e.getMessage());
         }
     }
-
 
 
     public static ObservableList<CancionDAO> SELECTALL() {

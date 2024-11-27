@@ -12,14 +12,12 @@ public class UserDashboard extends Stage {
     private UsuarioDAO usuario;
 
     public UserDashboard(UsuarioDAO usuario) {
-        this.usuario = usuario; // Asignar el usuario actual
+        this.usuario = usuario;
         this.setTitle("Dashboard - Usuario");
 
-        // Crear contenido con estilo
         VBox contenido = CrearContenido();
         contenido.getStyleClass().add("vbox");
 
-        // Configurar escena
         Scene scene = new Scene(contenido, 500, 700);
         scene.getStylesheets().add(getClass().getResource("/styles/spotify.css").toExternalForm());
 
@@ -38,12 +36,11 @@ public class UserDashboard extends Stage {
 
         Button btnMisDatos = new Button("Mis Datos");
         btnMisDatos.getStyleClass().add("button");
-        btnMisDatos.setOnAction(event -> new MisDatos(usuario)); // Abre MisDatos
+        btnMisDatos.setOnAction(event -> new MisDatos(usuario));
 
         VBox vbox = new VBox(20, btnComprar, btnHistorial, btnMisDatos);
         vbox.setAlignment(Pos.CENTER);
         vbox.getStyleClass().add("vbox");
         return vbox;
     }
-
 }

@@ -38,17 +38,14 @@ public class Estadisticas extends Stage {
 
         BarChart<String, Number> barChart = createBarChart();
 
-        // Obtener estadísticas
         CompraDAO compraDAO = new CompraDAO();
         Map<String, Integer> ventasPorMes = compraDAO.obtenerVentasPorMes();
 
-        // Verificar si hay datos
         if (ventasPorMes.isEmpty()) {
             Label sinDatos = new Label("No hay datos disponibles para mostrar.");
             sinDatos.setStyle("-fx-font-size: 16px; -fx-text-fill: black;");
             mainContainer.getChildren().addAll(titulo, sinDatos);
         } else {
-            // Agregar datos al gráfico de pastel y barras
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             ventasPorMes.forEach((mes, cantidad) -> {
                 PieChart.Data pieData = new PieChart.Data(mes, cantidad);
@@ -59,19 +56,15 @@ public class Estadisticas extends Stage {
             });
             barChart.getData().add(series);
 
-            // Crear tabla numérica
             TableView<Map.Entry<String, Integer>> tableView = createDataTable(ventasPorMes);
 
-            // Añadir elementos al contenedor
             chartsContainer.getChildren().addAll(pieChart, barChart);
             mainContainer.getChildren().addAll(titulo, chartsContainer, tableView);
         }
 
-        // Crear escena
         Scene scene = new Scene(mainContainer, 900, 700);
         scene.getStylesheets().add(getClass().getResource("/styles/estadisticas.css").toExternalForm());
 
-        // Configuración de la ventana
         this.setTitle("Estadísticas de Ventas");
         this.setScene(scene);
         this.show();

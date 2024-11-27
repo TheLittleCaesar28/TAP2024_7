@@ -22,18 +22,15 @@ public class Comprar extends Stage {
     private Label lblTotal;
     private double totalCompra = 0.0;
 
-    private int idUsuario; // Declaración de idUsuario
+    private int idUsuario;
 
-    // Ruta base para las imágenes
     private static final String BASE_PATH = "C:\\Users\\eduar\\OneDrive\\Escritorio\\ITC\\7mo Semestre\\Tópicos Avanzados de Programación\\Albumes\\";
 
-    // Constructor que recibe el idUsuario
     public Comprar(int idUsuario) {
-        this.idUsuario = idUsuario; // Inicialización de idUsuario
+        this.idUsuario = idUsuario;
         VBox contenido = CrearContenido();
         Scene scene = new Scene(contenido, 800, 700);
 
-        // Verificar si el archivo CSS existe
         var cssResource = getClass().getResource("/styles/comprar.css");
         if (cssResource != null) {
             scene.getStylesheets().add(cssResource.toExternalForm());
@@ -49,7 +46,6 @@ public class Comprar extends Stage {
     private void CrearUI() {
         tbvCanciones = new TableView<>();
 
-        // Columna: Imagen del álbum
         TableColumn<CancionDAO, Void> colImagen = new TableColumn<>("Imagen");
         colImagen.setCellFactory(param -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
@@ -61,10 +57,10 @@ public class Comprar extends Stage {
                     setGraphic(null);
                 } else {
                     CancionDAO cancion = getTableView().getItems().get(getIndex());
-                    String rutaImagenRelativa = cancion.getAlbumImagenRuta(); // Ruta relativa desde la BD
+                    String rutaImagenRelativa = cancion.getAlbumImagenRuta();
                     if (rutaImagenRelativa != null && !rutaImagenRelativa.isEmpty()) {
                         try {
-                            String rutaCompleta = BASE_PATH + rutaImagenRelativa; // Ruta completa
+                            String rutaCompleta = BASE_PATH + rutaImagenRelativa;
                             File archivoImagen = new File(rutaCompleta);
                             if (archivoImagen.exists() && archivoImagen.isFile()) {
                                 imageView.setImage(new Image(archivoImagen.toURI().toString(), 50, 50, true, true));
@@ -77,26 +73,22 @@ public class Comprar extends Stage {
                             imageView.setImage(null);
                         }
                     } else {
-                        imageView.setImage(null); // Si no hay ruta, no mostrar nada
+                        imageView.setImage(null);
                     }
                     setGraphic(imageView);
                 }
             }
         });
 
-        // Columna: Nombre de la canción
         TableColumn<CancionDAO, String> colNombre = new TableColumn<>("Canción");
         colNombre.setCellValueFactory(c -> c.getValue().nombreCancionProperty());
 
-        // Columna: Nombre del álbum
         TableColumn<CancionDAO, String> colAlbum = new TableColumn<>("Álbum");
         colAlbum.setCellValueFactory(c -> c.getValue().albumNombreProperty());
 
-        // Columna: Precio
         TableColumn<CancionDAO, Double> colPrecio = new TableColumn<>("Precio");
         colPrecio.setCellValueFactory(c -> c.getValue().precioProperty().asObject());
 
-        // Columna: Botón Agregar
         TableColumn<CancionDAO, Void> colAgregar = new TableColumn<>("Agregar");
         colAgregar.setCellFactory(param -> new TableCell<>() {
             private final Button btn = new Button("Agregar");
@@ -117,10 +109,8 @@ public class Comprar extends Stage {
             }
         });
 
-        // Añadir columnas a la tabla
         tbvCanciones.getColumns().addAll(colImagen, colNombre, colAlbum, colPrecio, colAgregar);
 
-        // Cargar datos en la tabla
         ObservableList<CancionDAO> canciones = new CancionDAO().SELECTALL();
         if (canciones.isEmpty()) {
             System.err.println("No se pudieron cargar las canciones.");
@@ -128,7 +118,6 @@ public class Comprar extends Stage {
         tbvCanciones.setItems(canciones);
         tbvCanciones.getStyleClass().add("table-view");
 
-        // Etiqueta para el total
         lblTotal = new Label("Total: $0.00");
         lblTotal.getStyleClass().add("label-mensaje");
     }
@@ -165,9 +154,8 @@ public class Comprar extends Stage {
 
     private void procesarCompra() {
         CompraDAO compra = new CompraDAO();
-        int idCompra = compra.INSERT(idUsuario); // Retorna el ID de la compra recién creada
+        int idCompra = compra.INSERT(idUsuario);
 
-        // Insertar detalles de la compra
         for (CancionDAO cancion : carrito) {
             compra.insertDetalle(idCompra, cancion.getIdCancion());
         }

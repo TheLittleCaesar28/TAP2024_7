@@ -18,7 +18,6 @@ public class AlbumDAO {
     private final StringProperty nombreArtista = new SimpleStringProperty();
     private String rutaImagen; // Variable para almacenar la ruta de la imagen
 
-    // Getters y Setters
     public int getIdAlbum() {
         return idAlbum.get();
     }
@@ -75,7 +74,6 @@ public class AlbumDAO {
         this.rutaImagen = rutaImagen;
     }
 
-    // Método para insertar un álbum con solo el nombre del archivo de la imagen
     public void insertarAlbum(String nombreAlbum, String rutaCompletaImagen, int idArtista) {
         String nombreImagen = Paths.get(rutaCompletaImagen).getFileName().toString();
 
@@ -96,7 +94,6 @@ public class AlbumDAO {
         }
     }
 
-    // Método SELECTALL para obtener todos los álbumes
     public ObservableList<AlbumDAO> SELECTALL() {
         ObservableList<AlbumDAO> lista = FXCollections.observableArrayList();
         String query = """
@@ -115,7 +112,7 @@ public class AlbumDAO {
                 album.setNombreAlbum(rs.getString("nombreAlbum"));
                 album.setIdArtista(rs.getInt("idArtista"));
                 album.setNombreArtista(rs.getString("nombreArtista"));
-                album.setRutaImagen(rs.getString("imagen")); // Asignar la ruta de la imagen
+                album.setRutaImagen(rs.getString("imagen"));
                 lista.add(album);
             }
         } catch (Exception e) {
@@ -124,7 +121,6 @@ public class AlbumDAO {
         return lista;
     }
 
-    // Método INSERT con uso de PreparedStatement para evitar inyecciones SQL
     public void INSERT() {
         String nombreImagen = Paths.get(getRutaImagen()).getFileName().toString(); // Extraer solo el nombre del archivo
 
@@ -143,8 +139,6 @@ public class AlbumDAO {
         }
     }
 
-
-    // Método UPDATE
     public void UPDATE() {
         String query = "UPDATE Albumes SET nombreAlbum = ?, idArtista = ?, imagen = ? WHERE idAlbum = ?";
         try (Connection conn = Conexion.getConnection();
@@ -162,7 +156,6 @@ public class AlbumDAO {
         }
     }
 
-    // Método DELETE
     public void DELETE() {
         String query = "DELETE FROM Albumes WHERE idAlbum = ?";
         try (Connection conn = Conexion.getConnection();

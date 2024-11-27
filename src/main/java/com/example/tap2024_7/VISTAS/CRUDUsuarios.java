@@ -18,7 +18,6 @@ public class CRUDUsuarios extends Stage {
     public CRUDUsuarios() {
         VBox contenido = CrearContenido();
         Scene scene = new Scene(contenido, 600, 700);
-        // Agregar hoja de estilos
         scene.getStylesheets().add(getClass().getResource("/styles/crudUsuarios.css").toExternalForm());
 
         this.setTitle("CRUD Usuarios");
@@ -27,7 +26,6 @@ public class CRUDUsuarios extends Stage {
     }
 
     private void CrearUI() {
-        // TableView
         tbvUsuarios = new TableView<>();
         tbvUsuarios.getStyleClass().add("table-view");
 
@@ -46,7 +44,6 @@ public class CRUDUsuarios extends Stage {
         tbvUsuarios.getColumns().addAll(colNombre, colEmail, colTelefono, colTipo);
         tbvUsuarios.setItems(new UsuarioDAO().SELECTALL());
 
-        // TextFields
         txtNombreUsuario = new TextField();
         txtNombreUsuario.setPromptText("Nombre de Usuario");
         txtNombreUsuario.getStyleClass().add("text-field");
@@ -63,13 +60,11 @@ public class CRUDUsuarios extends Stage {
         txtTelefono.setPromptText("Teléfono");
         txtTelefono.getStyleClass().add("text-field");
 
-        // ComboBox
         cbTipoUsuario = new ComboBox<>();
         cbTipoUsuario.getItems().addAll("Administrador", "Usuario");
         cbTipoUsuario.setPromptText("Seleccione el Tipo de Usuario");
         cbTipoUsuario.getStyleClass().add("combo-box");
 
-        // Buttons
         btnAgregar = new Button("Agregar");
         btnAgregar.setOnAction(e -> agregarUsuario());
         btnAgregar.getStyleClass().add("button");
@@ -86,11 +81,9 @@ public class CRUDUsuarios extends Stage {
     private VBox CrearContenido() {
         CrearUI();
 
-        // HBox para los botones
         HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
         botones.getStyleClass().add("hbox");
 
-        // VBox para el diseño general
         VBox vbox = new VBox(10, tbvUsuarios, txtNombreUsuario, txtPassword, txtEmail, txtTelefono, cbTipoUsuario, botones);
         vbox.getStyleClass().add("vbox");
 

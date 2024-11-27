@@ -18,7 +18,6 @@ public class CRUDCanciones extends Stage {
     public CRUDCanciones() {
         VBox contenido = CrearContenido();
         Scene scene = new Scene(contenido, 600, 700);
-        // Añadir hoja de estilos
         scene.getStylesheets().add(getClass().getResource("/styles/crudCanciones.css").toExternalForm());
 
         this.setTitle("CRUD Canciones");
@@ -27,7 +26,6 @@ public class CRUDCanciones extends Stage {
     }
 
     private void CrearUI() {
-        // TableView setup
         tbvCanciones = new TableView<>();
         tbvCanciones.getStyleClass().add("table-view");
 
@@ -43,7 +41,6 @@ public class CRUDCanciones extends Stage {
         tbvCanciones.getColumns().addAll(colNombre, colAlbum, colPrecio);
         tbvCanciones.setItems(new CancionDAO().SELECTALL());
 
-        // TextFields
         txtNombre = new TextField();
         txtNombre.setPromptText("Nombre de la Canción");
         txtNombre.getStyleClass().add("text-field");
@@ -52,13 +49,11 @@ public class CRUDCanciones extends Stage {
         txtPrecio.setPromptText("Precio de la Canción");
         txtPrecio.getStyleClass().add("text-field");
 
-        // ComboBox for Albums
         cbAlbumes = new ComboBox<>();
         cbAlbumes.setItems(new AlbumDAO().SELECTALL());
         cbAlbumes.setPromptText("Seleccione un Álbum");
         cbAlbumes.getStyleClass().add("combo-box");
 
-        // Configuración de celdas para mostrar el nombre del álbum
         cbAlbumes.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(AlbumDAO item, boolean empty) {
@@ -69,7 +64,7 @@ public class CRUDCanciones extends Stage {
         CancionDAO cancion = new CancionDAO();
         cancion.setNombreCancion("Nueva Canción");
         cancion.setPrecio(19.99);
-        cancion.setIdAlbum(1); // ID del álbum al que pertenece
+        cancion.setIdAlbum(1);
         cancion.INSERT();
 
 
@@ -81,7 +76,6 @@ public class CRUDCanciones extends Stage {
             }
         });
 
-        // Buttons
         btnAgregar = new Button("Agregar");
         btnAgregar.setOnAction(e -> agregarCancion());
         btnAgregar.getStyleClass().add("button");
@@ -98,11 +92,9 @@ public class CRUDCanciones extends Stage {
     private VBox CrearContenido() {
         CrearUI();
 
-        // HBox para los botones
         HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
         botones.getStyleClass().add("hbox");
 
-        // VBox para el diseño general
         VBox vbox = new VBox(10, tbvCanciones, txtNombre, txtPrecio, cbAlbumes, botones);
         vbox.getStyleClass().add("vbox");
 

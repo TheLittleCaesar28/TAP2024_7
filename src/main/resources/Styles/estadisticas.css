@@ -1,26 +1,22 @@
 .vbox {
     -fx-alignment: center;
-    -fx-background-color: #191414; /* Fondo oscuro estilo Spotify */
+    -fx-background-color: #191414;
     -fx-padding: 20;
     -fx-spacing: 20;
 }
-
 .label {
     -fx-font-family: 'Arial', sans-serif;
     -fx-font-size: 18px;
     -fx-text-fill: white;
 }
-
 .chart-pie {
-    -fx-background-color: transparent; /* Fondo transparente para el gráfico */
+    -fx-background-color: transparent;
 }
-
 .chart-title {
-    -fx-text-fill: #1DB954; /* Verde estilo Spotify */
+    -fx-text-fill: #1DB954;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
-
 .chart-legend {
     -fx-background-color: transparent;
     -fx-text-fill: white;
@@ -30,14 +26,13 @@
     -fx-border-radius: 5;
     -fx-font-family: "Arial";
     -fx-font-size: 14px;
-    -fx-background-color: #f4f4f4; /* Fondo claro */
+    -fx-background-color: #f4f4f4;
 }
-
 .table-view .column-header {
-    -fx-background-color: #1DB954; /* Fondo gris claro */
-    -fx-text-fill: black; /* Texto negro */
-    -fx-font-weight: bold; /* Texto en negrita */
-    -fx-alignment: center; /* Centrado */
+    -fx-background-color: #1DB954;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
 
 }
 

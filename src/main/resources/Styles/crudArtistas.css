@@ -1,11 +1,8 @@
-/* Fondo principal de Spotify */
 .root {
-    -fx-background-color: #191414; /* Fondo oscuro estilo Spotify */
+    -fx-background-color: #191414;
     -fx-font-family: 'Arial', sans-serif;
     -fx-padding: 20;
 }
-
-/* Contenedor principal */
 .vbox {
     -fx-alignment: center;
     -fx-background-color: #191414;
@@ -13,92 +10,70 @@
     -fx-spacing: 20;
     -fx-border-radius: 10;
 }
-
-/* Etiquetas (títulos y texto general) */
 .label {
     -fx-font-family: 'Arial', sans-serif;
     -fx-font-size: 24px;
-    -fx-text-fill: #1DB954; /* Verde Spotify */
+    -fx-text-fill: #1DB954;
     -fx-font-weight: bold;
 }
-
-/* Gráficos (tanto de pastel como de barras) */
 .chart-pie, .chart-bar {
-    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-background-color: transparent;
     -fx-border-color: #1DB954;
     -fx-border-radius: 10;
 }
-
-/* Botones generales */
 .button {
-    -fx-background-color: #1DB954; /* Verde Spotify */
-    -fx-text-fill: white; /* Texto blanco */
+    -fx-background-color: #1DB954;
+    -fx-text-fill: white;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-border-radius: 5;
     -fx-padding: 10;
-    -fx-cursor: hand; /* Cambiar cursor a mano */
+    -fx-cursor: hand;
 }
-
 .button:hover {
-    -fx-background-color: #14843d; /* Verde más oscuro para hover */
+    -fx-background-color: #14843d;
     -fx-text-fill: white;
 }
-
-/* Elementos específicos */
 .hbox {
     -fx-spacing: 15;
     -fx-alignment: center;
 }
-
-/* Ajuste de texto en tablas */
 .table-view .text {
     -fx-font-size: 14px;
     -fx-wrap-text: true;
     -fx-text-fill: black;
 }
-
-/* Placeholder para tablas vacías */
 .table-view .placeholder {
     -fx-font-size: 14px;
-    -fx-text-fill: #888888; /* Texto gris */
+    -fx-text-fill: #888888;
 }
-
-/* Inputs de texto */
 .text-field {
-    -fx-background-color: #ffffff; /* Fondo blanco */
-    -fx-border-color: #1DB954; /* Borde verde Spotify */
-    -fx-text-fill: black; /* Texto negro */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1DB954;
+    -fx-text-fill: black;
     -fx-font-size: 14px;
     -fx-padding: 5;
 }
-
-/* Combobox */
 .combo-box {
-    -fx-background-color: #ffffff; /* Fondo blanco */
-    -fx-border-color: #1DB954; /* Borde verde Spotify */
-    -fx-text-fill: black; /* Texto negro */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1DB954;
+    -fx-text-fill: black;
     -fx-font-size: 14px;
 }
-
-/* Tooltip */
 .tooltip {
-    -fx-background-color: #191414; /* Fondo oscuro */
-    -fx-text-fill: white; /* Texto blanco */
+    -fx-background-color: #191414;
+    -fx-text-fill: white;
     -fx-font-size: 12px;
     -fx-border-color: #1DB954;
 }
-
-/* Botones especiales (por ejemplo, cancelar) */
 .button-cancel {
-    -fx-background-color: #FF4C4C; /* Rojo para cancelar */
+    -fx-background-color: #FF4C4C;
     -fx-text-fill: white;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-border-radius: 5;
 }
-
 .button-cancel:hover {
-    -fx-background-color: #D43636; /* Rojo más oscuro para hover */
+    -fx-background-color: #D43636;
     -fx-text-fill: white;
 }

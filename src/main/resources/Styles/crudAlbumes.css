@@ -1,16 +1,13 @@
-/* crudAlbumes.css */
 
-/* General background */
 .root {
-    -fx-background-color: #191414; /* Spotify dark background */
+    -fx-background-color: #191414;
     -fx-padding: 20;
     -fx-font-family: 'Arial', sans-serif;
 }
 
-/* TableView styles */
 .table-view {
     -fx-background-color: white;
-    -fx-border-color: #1DB954; /* Spotify green */
+    -fx-border-color: #1DB954;
     -fx-border-radius: 8px;
     -fx-padding: 10;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.3, 4, 4);
@@ -22,16 +19,15 @@
 }
 
 .table-view .table-row-cell:hover {
-    -fx-background-color: #f1f3f5; /* Light gray hover effect */
+    -fx-background-color: #f1f3f5;
 }
 
 .table-view .table-row-cell:selected {
-    -fx-background-color: #cce5ff; /* Light blue for selected rows */
+    -fx-background-color: #cce5ff;
 }
 
-/* Buttons */
 .button {
-    -fx-background-color: #1DB954; /* Spotify green */
+    -fx-background-color: #1DB954;
     -fx-text-fill: white;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
@@ -43,20 +39,19 @@
 }
 
 .button:hover {
-    -fx-background-color: #1AA34A; /* Darker green */
-    -fx-scale-x: 1.05; /* Slight zoom effect */
+    -fx-background-color: #1AA34A;
+    -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
 
 .button:pressed {
-    -fx-background-color: #18883F; /* Even darker green */
+    -fx-background-color: #18883F;
     -fx-effect: none;
 }
 
-/* Text fields and ComboBox */
 .text-field, .combo-box {
     -fx-background-color: #ffffff;
-    -fx-border-color: #ced4da; /* Light gray border */
+    -fx-border-color: #ced4da;
     -fx-border-radius: 8px;
     -fx-padding: 12;
     -fx-font-size: 14px;
@@ -64,52 +59,48 @@
 }
 
 .text-field:focused, .combo-box:focused {
-    -fx-border-color: #80bdff; /* Blue focus */
+    -fx-border-color: #80bdff;
     -fx-border-width: 2px;
     -fx-effect: dropshadow(gaussian, rgba(0, 123, 255, 0.5), 8, 0.3, 1, 1);
 }
 
-/* ImageView for album cover */
 .image-view {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.3, 4, 4);
-    -fx-border-color: #1DB954; /* Spotify green */
+    -fx-border-color: #1DB954;
     -fx-border-radius: 5px;
     -fx-border-width: 2px;
     -fx-padding: 5;
 }
 
-/* VBox styling */
 .vbox {
     -fx-spacing: 20;
     -fx-alignment: center;
     -fx-background-radius: 10px;
-    -fx-background-color: #222326; /* Spotify dark secondary */
-    -fx-border-color: #1DB954; /* Spotify green */
+    -fx-background-color: #222326;
+    -fx-border-color: #1DB954;
     -fx-border-width: 2;
     -fx-padding: 25;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0.3, 0, 0);
 }
 
-/* Button variants */
 .button-primary {
-    -fx-background-color: #007bff; /* Bootstrap blue */
+    -fx-background-color: #007bff;
 }
 
 .button-primary:hover {
-    -fx-background-color: #0056b3; /* Darker blue */
+    -fx-background-color: #0056b3;
 }
 
 .button-danger {
-    -fx-background-color: #dc3545; /* Bootstrap red */
+    -fx-background-color: #dc3545;
 }
 
 .button-danger:hover {
-    -fx-background-color: #c82333; /* Darker red */
+    -fx-background-color: #c82333;
 }
 
-/* Tooltip styles */
 .tooltip {
-    -fx-background-color: #1DB954; /* Spotify green */
+    -fx-background-color: #1DB954;
     -fx-text-fill: white;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
