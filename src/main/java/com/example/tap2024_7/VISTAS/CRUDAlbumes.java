@@ -171,19 +171,6 @@ public class CRUDAlbumes extends Stage {
             if (artistaSeleccionado != null) {
                 seleccionado.setIdArtista(artistaSeleccionado.getIdArtista());
             }
-            if (archivoImagen != null) {
-                String nombreImagen = archivoImagen.getName();
-                seleccionado.setRutaImagen(nombreImagen);
-
-                File destino = new File("imagenes/" + nombreImagen);
-                if (!destino.exists()) {
-                    try {
-                        Files.copy(archivoImagen.toPath(), destino.toPath());
-                    } catch (IOException e) {
-                        mostrarAlerta("Error", "No se pudo mover la imagen", e.getMessage());
-                    }
-                }
-            }
             seleccionado.UPDATE();
             actualizarTabla();
         } else {

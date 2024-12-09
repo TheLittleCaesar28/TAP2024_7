@@ -27,11 +27,15 @@ public class AdminDashboard extends Stage {
         btnCRUDUsuarios.setOnAction(event -> new CRUDUsuarios());
         btnCRUDUsuarios.getStyleClass().add("button");
 
+        Button btnCRUDGenero = new Button("CRUD GENEROS");
+        btnCRUDGenero.getStyleClass().add("button");
+        btnCRUDGenero.setOnAction(event -> new CRUDGenero());
+
         Button btnEstadisticas = new Button("ESTADÍSTICAS");
         btnEstadisticas.setOnAction(event -> new Estadisticas());
         btnEstadisticas.getStyleClass().add("button");
 
-        vbox.getChildren().addAll(btnCRUDArtistas, btnCRUDAlbumes, btnCRUDCanciones, btnCRUDUsuarios, btnEstadisticas);
+        vbox.getChildren().addAll(btnCRUDArtistas, btnCRUDAlbumes, btnCRUDCanciones, btnCRUDUsuarios, btnCRUDGenero, btnEstadisticas);
 
         Scene scene = new Scene(vbox, 500, 700);
         scene.getStylesheets().add(getClass().getResource("/styles/adminDashboard.css").toExternalForm());

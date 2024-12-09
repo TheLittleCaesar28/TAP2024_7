@@ -1,7 +1,6 @@
 package com.example.tap2024_7.VISTAS;
 
-import com.example.tap2024_7.MODELS.AlbumDAO;
-import com.example.tap2024_7.MODELS.CancionDAO;
+import com.example.tap2024_7.MODELS.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -13,11 +12,16 @@ public class CRUDCanciones extends Stage {
     private TableView<CancionDAO> tbvCanciones;
     private TextField txtNombre, txtPrecio;
     private ComboBox<AlbumDAO> cbAlbumes;
-    private Button btnAgregar, btnActualizar, btnEliminar;
+    private ComboBox<IdiomaDAO> cbIdiomas;
+    private ComboBox<GeneroDAO> cbGenero;
+    private ComboBox<PlaylistDAO> cbPlaylist;
+    private Button btnAgregar, btnActualizar, btnEliminar, btnFiltrar, btnAgregarAPlaylist;
+    private ComboBox<IdiomaDAO> cbFiltroIdioma;
+    private ComboBox<GeneroDAO> cbFiltroGenero;
 
     public CRUDCanciones() {
-        VBox contenido = CrearContenido();
-        Scene scene = new Scene(contenido, 600, 700);
+        VBox contenido = crearContenido();
+        Scene scene = new Scene(contenido, 800, 700);
         scene.getStylesheets().add(getClass().getResource("/styles/crudCanciones.css").toExternalForm());
 
         this.setTitle("CRUD Canciones");
@@ -25,7 +29,8 @@ public class CRUDCanciones extends Stage {
         this.show();
     }
 
-    private void CrearUI() {
+    private void crearUI() {
+        // Crear tabla
         tbvCanciones = new TableView<>();
         tbvCanciones.getStyleClass().add("table-view");
 
@@ -35,90 +40,100 @@ public class CRUDCanciones extends Stage {
         TableColumn<CancionDAO, String> colAlbum = new TableColumn<>("Álbum");
         colAlbum.setCellValueFactory(c -> c.getValue().albumNombreProperty());
 
+        TableColumn<CancionDAO, String> colIdioma = new TableColumn<>("Idioma");
+        colIdioma.setCellValueFactory(c -> c.getValue().idiomaNombreProperty());
+
+        TableColumn<CancionDAO, String> colGenero = new TableColumn<>("Género");
+        colGenero.setCellValueFactory(c -> c.getValue().generoNombreProperty());
+
         TableColumn<CancionDAO, Double> colPrecio = new TableColumn<>("Precio");
         colPrecio.setCellValueFactory(c -> c.getValue().precioProperty().asObject());
 
-        tbvCanciones.getColumns().addAll(colNombre, colAlbum, colPrecio);
+        tbvCanciones.getColumns().addAll(colNombre, colAlbum, colIdioma, colGenero, colPrecio);
         tbvCanciones.setItems(new CancionDAO().SELECTALL());
 
+        // Campos de entrada
         txtNombre = new TextField();
         txtNombre.setPromptText("Nombre de la Canción");
-        txtNombre.getStyleClass().add("text-field");
 
         txtPrecio = new TextField();
         txtPrecio.setPromptText("Precio de la Canción");
-        txtPrecio.getStyleClass().add("text-field");
 
+        // ComboBox de selección
         cbAlbumes = new ComboBox<>();
         cbAlbumes.setItems(new AlbumDAO().SELECTALL());
         cbAlbumes.setPromptText("Seleccione un Álbum");
-        cbAlbumes.getStyleClass().add("combo-box");
 
-        cbAlbumes.setCellFactory(param -> new ListCell<>() {
-            @Override
-            protected void updateItem(AlbumDAO item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? null : item.getNombreAlbum());
-            }
-        });
-        CancionDAO cancion = new CancionDAO();
-        cancion.setNombreCancion("Nueva Canción");
-        cancion.setPrecio(19.99);
-        cancion.setIdAlbum(1);
-        cancion.INSERT();
+        cbIdiomas = new ComboBox<>();
+        cbIdiomas.setItems(new IdiomaDAO().SELECTALL());
+        cbIdiomas.setPromptText("Seleccione un Idioma");
 
+        cbGenero = new ComboBox<>();
+        cbGenero.setItems(new GeneroDAO().SELECTALL());
+        cbGenero.setPromptText("Seleccione un Género");
 
-        cbAlbumes.setButtonCell(new ListCell<>() {
-            @Override
-            protected void updateItem(AlbumDAO item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "Seleccione un Álbum" : item.getNombreAlbum());
-            }
-        });
+        cbPlaylist = new ComboBox<>();
+        cbPlaylist.setItems(new PlaylistDAO().SELECTALL());
+        cbPlaylist.setPromptText("Seleccione una Playlist");
 
+        // Botones
         btnAgregar = new Button("Agregar");
         btnAgregar.setOnAction(e -> agregarCancion());
-        btnAgregar.getStyleClass().add("button");
 
         btnActualizar = new Button("Actualizar");
         btnActualizar.setOnAction(e -> actualizarCancion());
-        btnActualizar.getStyleClass().add("button");
 
         btnEliminar = new Button("Eliminar");
         btnEliminar.setOnAction(e -> eliminarCancion());
-        btnEliminar.getStyleClass().add("button");
+
+        btnFiltrar = new Button("Filtrar");
+        btnFiltrar.setOnAction(e -> actualizarTabla());
+
+        btnAgregarAPlaylist = new Button("Agregar a Playlist");
+        btnAgregarAPlaylist.setOnAction(e -> agregarCancionAPlaylist());
     }
 
-    private VBox CrearContenido() {
-        CrearUI();
+    private VBox crearContenido() {
+        crearUI();
 
-        HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
-        botones.getStyleClass().add("hbox");
+        HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar, btnAgregarAPlaylist);
 
-        VBox vbox = new VBox(10, tbvCanciones, txtNombre, txtPrecio, cbAlbumes, botones);
+        VBox vbox = new VBox(10, tbvCanciones, txtNombre, txtPrecio, cbAlbumes, cbIdiomas, cbGenero, cbPlaylist, botones);
         vbox.getStyleClass().add("vbox");
-
         return vbox;
     }
 
     private void agregarCancion() {
-        if (txtNombre.getText().isEmpty() || txtPrecio.getText().isEmpty() || cbAlbumes.getSelectionModel().isEmpty()) {
+        if (txtNombre.getText().isEmpty() || txtPrecio.getText().isEmpty() || cbAlbumes.getSelectionModel().isEmpty() || cbIdiomas.getSelectionModel().isEmpty() || cbGenero.getSelectionModel().isEmpty()) {
             mostrarAlerta("Error", "Por favor, llena todos los campos obligatorios.");
             return;
         }
 
         CancionDAO cancion = new CancionDAO();
-        cancion.setNombreCancion(txtNombre.getText());
         try {
+            cancion.setNombreCancion(txtNombre.getText());
             cancion.setPrecio(Double.parseDouble(txtPrecio.getText()));
+            cancion.setIdAlbum(cbAlbumes.getSelectionModel().getSelectedItem().getIdAlbum());
+            cancion.setIdIdioma(cbIdiomas.getSelectionModel().getSelectedItem().getIdIdioma());
+            cancion.setIdGenero(cbGenero.getSelectionModel().getSelectedItem().getIdGenero());
+            cancion.INSERT();
+            actualizarTabla();
         } catch (NumberFormatException e) {
             mostrarAlerta("Error", "El precio debe ser un número válido.");
+        }
+    }
+
+    private void agregarCancionAPlaylist() {
+        CancionDAO seleccionada = tbvCanciones.getSelectionModel().getSelectedItem();
+        PlaylistDAO playlistSeleccionada = cbPlaylist.getSelectionModel().getSelectedItem();
+
+        if (seleccionada == null || playlistSeleccionada == null) {
+            mostrarAlerta("Error", "Selecciona una canción y una playlist.");
             return;
         }
 
-        cancion.setIdAlbum(cbAlbumes.getSelectionModel().getSelectedItem().getIdAlbum());
-        cancion.INSERT();
-        actualizarTabla();
+        playlistSeleccionada.agregarCancionAPlaylist(seleccionada.getIdCancion());
+        mostrarAlerta("Éxito", "Canción agregada a la playlist.");
     }
 
     private void actualizarCancion() {
@@ -128,20 +143,30 @@ public class CRUDCanciones extends Stage {
             return;
         }
 
-        seleccionado.setNombreCancion(txtNombre.getText());
         try {
+            seleccionado.setNombreCancion(txtNombre.getText());
             seleccionado.setPrecio(Double.parseDouble(txtPrecio.getText()));
+            if (cbAlbumes.getSelectionModel().getSelectedItem() != null) {
+                seleccionado.setIdAlbum(cbAlbumes.getSelectionModel().getSelectedItem().getIdAlbum());
+            }
+            if (cbIdiomas.getSelectionModel().getSelectedItem() != null) {
+                seleccionado.setIdIdioma(cbIdiomas.getSelectionModel().getSelectedItem().getIdIdioma());
+            }
+            if (cbGenero.getSelectionModel().getSelectedItem() != null) {
+                seleccionado.setIdGenero(cbGenero.getSelectionModel().getSelectedItem().getIdGenero());
+            }
+            seleccionado.UPDATE();
+            actualizarTabla();
         } catch (NumberFormatException e) {
             mostrarAlerta("Error", "El precio debe ser un número válido.");
-            return;
         }
+    }
 
-        if (cbAlbumes.getSelectionModel().getSelectedItem() != null) {
-            seleccionado.setIdAlbum(cbAlbumes.getSelectionModel().getSelectedItem().getIdAlbum());
-        }
-
-        seleccionado.UPDATE();
-        actualizarTabla();
+    private void actualizarTabla() {
+        String filtroIdioma = cbFiltroIdioma.getSelectionModel().isEmpty() ? null : cbFiltroIdioma.getSelectionModel().getSelectedItem().getNombreIdioma();
+        String filtroGenero = cbFiltroGenero.getSelectionModel().isEmpty() ? null : cbFiltroGenero.getSelectionModel().getSelectedItem().getNombreGenero();
+        tbvCanciones.setItems(new CancionDAO().SELECTALL(filtroIdioma, filtroGenero));
+        tbvCanciones.refresh();
     }
 
     private void eliminarCancion() {
@@ -150,18 +175,12 @@ public class CRUDCanciones extends Stage {
             mostrarAlerta("Error", "Selecciona una canción para eliminar.");
             return;
         }
-
         seleccionado.DELETE();
         actualizarTabla();
     }
 
-    private void actualizarTabla() {
-        tbvCanciones.setItems(new CancionDAO().SELECTALL());
-        tbvCanciones.refresh();
-    }
-
     private void mostrarAlerta(String titulo, String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
         alerta.setContentText(mensaje);
         alerta.showAndWait();

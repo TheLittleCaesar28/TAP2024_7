@@ -34,11 +34,17 @@ public class UserDashboard extends Stage {
         btnHistorial.getStyleClass().add("button");
         btnHistorial.setOnAction(event -> new HistorialCompras(usuario.getIdUsuario()));
 
+        Button btnPlaylist = new Button("Mis Playlist");
+        btnPlaylist.getStyleClass().add("button");
+        btnPlaylist.setOnAction(event -> new CRUDPlaylists());
+
+
+
         Button btnMisDatos = new Button("Mis Datos");
         btnMisDatos.getStyleClass().add("button");
         btnMisDatos.setOnAction(event -> new MisDatos(usuario));
 
-        VBox vbox = new VBox(20, btnComprar, btnHistorial, btnMisDatos);
+        VBox vbox = new VBox(20, btnComprar, btnHistorial, btnMisDatos, btnPlaylist);
         vbox.setAlignment(Pos.CENTER);
         vbox.getStyleClass().add("vbox");
         return vbox;

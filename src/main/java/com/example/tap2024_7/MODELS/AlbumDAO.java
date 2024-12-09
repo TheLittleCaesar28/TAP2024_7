@@ -73,6 +73,11 @@ public class AlbumDAO {
     public void setRutaImagen(String rutaImagen) {
         this.rutaImagen = rutaImagen;
     }
+    @Override
+    public String toString() {
+        return this.getNombreAlbum(); // Asegúrate de usar el método que retorna el nombre del álbum
+    }
+
 
     public void insertarAlbum(String nombreAlbum, String rutaCompletaImagen, int idArtista) {
         String nombreImagen = Paths.get(rutaCompletaImagen).getFileName().toString();

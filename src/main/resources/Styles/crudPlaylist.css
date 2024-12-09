@@ -1,0 +1,74 @@
+/* General Styles */
+.vbox {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+    -fx-background-color: #191414; /* Fondo oscuro */
+}
+
+/* TableView */
+.table-view {
+    -fx-border-color: #1DB954; /* Borde verde */
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-color: white; /* Fondo de la tabla */
+    -fx-text-fill: black; /* Texto en blanco */
+}
+
+.table-view .column-header {
+    -fx-background-color: #1DB954; /* Fondo verde para encabezados */
+    -fx-text-fill: #FFFFFF; /* Texto en blanco */
+    -fx-font-weight: bold; /* Texto en negrita */
+    -fx-font-size: 14px; /* Tamaño de fuente */
+    -fx-alignment: center; /* Centrar texto */
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white; /* Fondo de las filas */
+    -fx-text-fill: black; /* Texto en blanco */
+    -fx-font-size: 12px;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #2A2A2A; /* Fondo más claro al pasar el mouse */
+}
+
+/* Input Fields */
+.text-field {
+    -fx-background-color: #FFFFFF; /* Fondo blanco */
+    -fx-border-color: #1DB954; /* Borde verde */
+    -fx-border-radius: 5;
+    -fx-padding: 8; /* Relleno */
+    -fx-text-fill: #000000; /* Texto en negro */
+    -fx-font-size: 12px; /* Tamaño de texto */
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #1DB954; /* Fondo verde */
+    -fx-text-fill: #FFFFFF; /* Texto en blanco */
+    -fx-font-weight: bold; /* Texto en negrita */
+    -fx-padding: 8 16; /* Relleno */
+    -fx-border-radius: 5; /* Bordes redondeados */
+    -fx-font-size: 12px; /* Tamaño de texto */
+}
+
+.button:hover {
+    -fx-background-color: #1ED760; /* Verde más claro al pasar el mouse */
+}
+
+.button-danger {
+    -fx-background-color: #E0245E; /* Fondo rojo */
+    -fx-text-fill: #FFFFFF; /* Texto en blanco */
+}
+
+.button-danger:hover {
+    -fx-background-color: #FF5A7B; /* Rojo más claro al pasar el mouse */
+}
+
+/* Placeholder for Empty Table */
+.table-view .placeholder {
+    -fx-text-fill: #FFFFFF; /* Texto blanco */
+    -fx-font-size: 12px; /* Tamaño de texto */
+    -fx-font-style: italic; /* Texto en cursiva */
+}

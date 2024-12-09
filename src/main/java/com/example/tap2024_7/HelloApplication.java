@@ -1,10 +1,7 @@
 package com.example.tap2024_7;
 
 import com.example.tap2024_7.MODELS.Conexion;
-import com.example.tap2024_7.VISTAS.Buscaminas;
-import com.example.tap2024_7.VISTAS.Calculadora;
-import com.example.tap2024_7.VISTAS.Loteria;
-import com.example.tap2024_7.VISTAS.Login;
+import com.example.tap2024_7.VISTAS.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -47,9 +44,12 @@ public class HelloApplication extends Application {
         MenuItem mitSpotify = new MenuItem("Spotify");
         mitSpotify.setOnAction(event -> new Login()); // El Login se muestra al seleccionar Spotify
 
+        MenuItem mitImpresion = new MenuItem("Impresora");
+        mitImpresion.setOnAction(event -> new Impresora());
+
         // Crear Menú Competencia 1
         menCompetencia1 = new Menu("Competencia 1");
-        menCompetencia1.getItems().addAll(mitCalculadora, mitLoteria, mitBuscaminas, mitSpotify);
+        menCompetencia1.getItems().addAll(mitCalculadora, mitLoteria, mitBuscaminas, mitSpotify, mitImpresion);
 
         // Configurar barra de menú principal
         mnbPrincipal = new MenuBar(menCompetencia1);
